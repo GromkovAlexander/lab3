@@ -6,13 +6,11 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.broadcast.Broadcast;
-import scala.Tuple2;
 
-import java.util.List;
 import java.util.Map;
 
 
-public class Main {
+public class FlightsInfoApp {
 
     public static JavaRDD<String> loadData(JavaSparkContext sc, String path) {
         JavaRDD<String> text = sc.textFile(path);
@@ -42,7 +40,8 @@ public class Main {
     public static void main(String[] args) {
 
         if (args.length != 3) {
-            System.err.println("Usage: ");
+            System.err.println("Usage: FlightsInfoApp <airports file path> <delays file path> <output path>");
+            System.exit(-1);
         }
 
         SparkConf conf = new SparkConf().setAppName("lab3");
