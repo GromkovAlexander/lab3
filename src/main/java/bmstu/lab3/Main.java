@@ -14,20 +14,19 @@ public class Main {
 
 
     public static void main(String[] args) {
+
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
 
-        JavaRDD<String> airports = sc.textFile(args[0]);
+        JavaRDD<String> airports = AirportsInfo.loadData(sc, args[0]);
 
-        String title = airports.first();
 
-        JavaRDD<String> airportsWithoutTitle = airports.filter(line -> !line.equals(title));
 
-        JavaRDD<String> airportsKV = airportsWithoutTitle.mapToPair(
-                s -> new Tuple2<>(
-                        Integer.parseInt(airportsWithoutTitle.flatMap(x -> Arrays.stream(x.split(COMMA, 2)))
-                )
-        );
+//        JavaRDD<String> airportsKV = airportsWithoutTitle.mapToPair(
+//                s -> new Tuple2<>(
+//                        Integer.parseInt(airportsWithoutTitle.flatMap(x -> Arrays.stream(x.split(COMMA, 2)))
+//                )
+//        );
 
 //        JavaRDD<String> check = out.flatMap(x -> Arrays.stream(x.split(COMMA, 2)).iterator());
 //        check.saveAsTextFile("output6");
