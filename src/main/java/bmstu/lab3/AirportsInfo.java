@@ -1,5 +1,6 @@
 package bmstu.lab3;
 
+import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
@@ -7,6 +8,8 @@ import scala.Tuple2;
 public class AirportsInfo {
 
     private final static String COMMA = ",";
+    private static final int COLUMN_AIRPORT_CODE = 0;
+    private static final int COLUMN_AIRPORT_DESCRIPTION = 1;
 
     public static JavaRDD<String> loadData(JavaSparkContext sc, String path) {
         JavaRDD<String> airports = sc.textFile(path);
@@ -19,14 +22,15 @@ public class AirportsInfo {
         return columns[pos];
     }
 
-    public static JavaRDD<String> sortKV(JavaRDD<String> file) {
-        JavaRDD<String> kv = file.mapToPair(
+    public static JavaPairRDD<Integer, String> sortKV(JavaRDD<String> file) {
+        JavaPairRDD<Integer, String> kv = file.mapToPair(
                 s -> new Tuple2<>(
-                        Integer.parseInt(getValue(s, 0)),
-                        getValue(s, 1)
+                        Integer.parseInt(getValue(s, COLUMN_AIRPORT_CODE)),
+                        getValue(s, COLUMN_AIRPORT_DESCRIPTION)
                 )
         );
 
+        return kv;
     }
 
 }
