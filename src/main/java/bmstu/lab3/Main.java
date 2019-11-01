@@ -13,18 +13,26 @@ import java.util.Map;
 
 public class Main {
 
+    public static JavaRDD<String> loadData(JavaSparkContext sc, String path) {
+        JavaRDD<String> text = sc.textFile(path);
+        String title = text.first();
+        return text.filter(s -> !s.equals(title));
+    }
+
 
     public static void main(String[] args) {
 
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
 
-        JavaRDD<String> airports = AirportsInfo.loadData(sc, args[0]);
+//        JavaRDD<String> airports = loadData(sc, args[0]);
+//
+//        JavaPairRDD<Integer, String> aiportsKV = AirportsInfo.sortKV(airports);
+//
+//        aiportsKV.saveAsTextFile("output11");
 
-        JavaPairRDD<Integer, String> aiportsKV = AirportsInfo.sortKV(airports);
-
-        aiportsKV.saveAsTextFile("output11");
-
+        //Потом заменить на args[1]
+        JavaRDD<String> delays = loadData(sc, args[0]);
 
 
 

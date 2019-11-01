@@ -14,12 +14,6 @@ public class AirportsInfo {
     private static final int COLUMN_AIRPORT_DESCRIPTION = 1;
     private static final int COUNT_AIRPORT_COLUMNS = 2;
 
-    public static JavaRDD<String> loadData(JavaSparkContext sc, String path) {
-        JavaRDD<String> airports = sc.textFile(path);
-        String title = airports.first();
-        return airports.filter(s -> !s.equals(title));
-    }
-
     public static String deleteQuotes(String s) {
         return s.replaceAll(QUOTES, EMPTY);
     }
