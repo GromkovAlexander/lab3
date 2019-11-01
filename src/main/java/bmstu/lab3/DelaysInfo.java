@@ -2,7 +2,6 @@ package bmstu.lab3;
 
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
-import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 
 public class DelaysInfo {
@@ -12,8 +11,8 @@ public class DelaysInfo {
     private final static String EMPTY = "";
 
     private static final int COUNT_AIRPORT_COLUMNS = 23;
-    private static final int AIRPORT_ID_FROM = 11;
-    private static final int AIRPORT_ID_TO = 14;
+    private static final int COLUMN_AIRPORT_ID_FROM = 11;
+    private static final int COLUMN_AIRPORT_ID_TO = 14;
 
 
     public static String deleteQuotes(String s) {
@@ -28,10 +27,12 @@ public class DelaysInfo {
     public static JavaPairRDD<Integer, Integer> flightsFromTo(JavaRDD<String> file) {
         JavaPairRDD<Integer, Integer> kv = file.mapToPair(
                 s -> new Tuple2<>(
-                        Integer.parseInt(getValue(s, AIRPORT_ID_FROM)),
-                        Integer.parseInt(getValue(s, AIRPORT_ID_TO))
+                        Integer.parseInt(getValue(s, COLUMN_AIRPORT_ID_FROM)),
+                        Integer.parseInt(getValue(s, COLUMN_AIRPORT_ID_TO))
                 )
         );
+
+        System.out.println("testGit");
 
         return kv;
     }
