@@ -13,7 +13,7 @@ public class Main {
 
         airports.saveAsTextFile("output1.txt");
 
-        
+
 
         JavaRDD<String> delays = sc.textFile(args[1]);
         delays.saveAsTextFile("output2.txt");
