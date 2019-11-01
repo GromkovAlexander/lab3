@@ -29,10 +29,6 @@ public class DelaysInfo {
     private static final float ONE_FLIGHT = 1;
 
 
-
-
-
-
     public static String deleteQuotes(String s) {
         return s.replaceAll(QUOTES, EMPTY);
     }
@@ -55,7 +51,7 @@ public class DelaysInfo {
                     //[1] количество рейсов
                     float[] flightsInfo = new float[3];
 
-                    if (Integer.parseInt(getValue(s, COLUMN_CANCELLED)) == IS_CANCELLED) {
+                    if (Float.parseFloat(getValue(s, COLUMN_CANCELLED)) == IS_CANCELLED) {
                         flightsInfo[CANCELLED_POS_INFO] = CANCELLED;
                         flightsInfo[DELAY_POS_INFO] = NULL_TIME;
                     } else {
