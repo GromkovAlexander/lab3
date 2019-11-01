@@ -50,7 +50,6 @@ public class FlightsInfoApp {
         JavaRDD<String> airports = loadData(sc, args[0]);
         JavaRDD<String> delays = loadData(sc, args[1]);
 
-
         Map<Integer, String> airportsInfo = AirportsInfo.sortKV(airports);
         JavaPairRDD<Pair<Integer, Integer>, String> delaysInfo = DelaysInfo.sort(delays);
 
