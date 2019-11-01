@@ -1,5 +1,6 @@
 package bmstu.lab3;
 
+import javafx.util.Pair;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -36,9 +37,9 @@ public class Main {
         //Потом заменить на args[1]
         JavaRDD<String> delays = loadData(sc, args[0]);
 
-        JavaPairRDD<Integer, Integer> airportsIDsKV = DelaysInfo.flightsFromTo(delays);
+        JavaPairRDD<Pair<Integer, Integer>, float[]> airportsIDsKV = DelaysInfo.flightsFromTo(delays);
 
-        airportsIDsKV.saveAsTextFile("output12");
+        airportsIDsKV.saveAsTextFile("output13");
 
 
 

@@ -15,12 +15,20 @@ public class DelaysInfo {
     private static final int COLUMN_FLIGHT_AIRPORT_ID_FROM = 11;
     private static final int COLUMN_FLIGHT_AIRPORT_ID_TO = 14;
     private static final int COLUMN_DELAY = 17;
-    private static final int COLUMN_CANCELED = 19;
+    private static final int COLUMN_CANCELLED = 19;
     private static final int COLUMN_FLIGHT_TOOK_PLACE = 14;
 
     private static final int DELAY_POS_INFO = 0;
-    private static final int TOOK_PLACE_POS_INFO = 1;
+    private static final int CANCELLED_POS_INFO = 1;
     private static final int NUBMER_OF_FLIGHTS_POS_INFO = 2;
+
+    private static final float IS_CANCELLED = 1;
+    private static final float CANCELLED = 1;
+    private static final float NO_CANCELLED = 0;
+    private static final float NULL_TIME = 0;
+    private static final float ONE_FLIGHT = 1;
+
+
 
 
 
@@ -34,38 +42,32 @@ public class DelaysInfo {
         return deleteQuotes(columns[pos]);
     }
 
-    public static JavaPairRDD<Integer, Integer> flightsFromTo(JavaRDD<String> file) {
-        JavaPairRDD<Pair<Integer, Integer>, float[]> kv = file.mapToPair(
+    public static JavaPairRDD<Pair<Integer, Integer>, float[]> flightsFromTo(JavaRDD<String> file) {
+        return file.mapToPair(
                 s -> {
                     Pair<Integer, Integer> airportIDs = new Pair<>(
                             Integer.parseInt(getValue(s, COLUMN_FLIGHT_AIRPORT_ID_FROM)),
                             Integer.parseInt(getValue(s, COLUMN_FLIGHT_AIRPORT_ID_TO))
                     );
 
+                    //[0] время опоздания
+                    //[1] отменен рейс или нет
+                    //[1] количество рейсов
                     float[] flightsInfo = new float[3];
 
-                    if (Integer.parseInt(getValue(s, COLUMN_DELAY_POS)) == 1) {
-
+                    if (Integer.parseInt(getValue(s, COLUMN_CANCELLED)) == IS_CANCELLED) {
+                        flightsInfo[CANCELLED_POS_INFO] = CANCELLED;
+                        flightsInfo[DELAY_POS_INFO] = NULL_TIME;
+                    } else {
+                        flightsInfo[CANCELLED_POS_INFO] = NO_CANCELLED;
+                        flightsInfo[DELAY_POS_INFO] = Float.parseFloat(getValue(s, COLUMN_DELAY));
                     }
 
+                    flightsInfo[NUBMER_OF_FLIGHTS_POS_INFO] = ONE_FLIGHT;
 
-                    return new Tuple2<>()
+
+                    return new Tuple2<>(airportIDs, flightsInfo);
                 });
-
-
-
-        //время опоздания
-        //отменен рейс или нет
-        //количество рейсов
-
-        if (Integer.parseInt(getValue()))
-
-
-
-
-
-
-        return kv;
     }
 
 }
