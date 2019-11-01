@@ -54,12 +54,12 @@ public class DelaysInfo {
                     //[2] количество рейсов
                     float[] flightsInfo = new float[3];
 
-                    if (getValue(s, COLUMN_DELAY).length() > 0) {
-                        flightsInfo[CANCELLED_POS_INFO] = NO_CANCELLED;
-                        flightsInfo[DELAY_POS_INFO] = Float.parseFloat(getValue(s, COLUMN_DELAY));
-                    } else {
+                    if (Float.parseFloat(getValue(s, COLUMN_CANCELLED)) == IS_CANCELLED) {
                         flightsInfo[CANCELLED_POS_INFO] = CANCELLED;
                         flightsInfo[DELAY_POS_INFO] = NULL_TIME;
+                    } else {
+                        flightsInfo[CANCELLED_POS_INFO] = NO_CANCELLED;
+                        flightsInfo[DELAY_POS_INFO] = Float.parseFloat(getValue(s, COLUMN_DELAY));
                     }
 
                     flightsInfo[NUBMER_OF_FLIGHTS_POS_INFO] = ONE_FLIGHT;
