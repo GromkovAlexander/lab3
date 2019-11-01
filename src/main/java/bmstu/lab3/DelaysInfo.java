@@ -70,13 +70,17 @@ public class DelaysInfo {
         return info.reduceByKey(
                 (info1, info2) -> {
 
-                    info1[COUNT_OF_FLIGHTS_POS_INFO] += info2[COUNT_OF_FLIGHTS_POS_INFO];
+                    info1[COUNT_OF_FLIGHTS_POS_INFO] += info2[COUNT_OF_FLIGHTS_POS_INFO] + info2[NUBMER_OF_FLIGHTS_POS_INFO];
 
                     info1[COUNT_OF_CANCELLED_POS_INFO] += info2[COUNT_OF_CANCELLED_POS_INFO] + info1[CANCELLED_POS_INFO] + info2[CANCELLED_POS_INFO];
 
-                    info1[MAX_DELAY_POS_INFO] = Float.max(info1[MAX_DELAY_POS_INFO], info2[MAX_DELAY_POS_INFO]);
+                    info1[MAX_DELAY_POS_INFO] = Float.max(info1[DELAY_POS_INFO], info2[DELAY_POS_INFO]);
 
                     info1[COUNT_OF_DELAY_FLIGHTS_POS_INFO] += info2[COUNT_OF_DELAY_FLIGHTS_POS_INFO];
+
+                    if (info2[DELAY_POS_INFO] != NULL_TIME) {
+                        info1[COUNT_OF_DELAY_FLIGHTS_POS_INFO]++;
+                    }
 
                     return info1;
                 }
