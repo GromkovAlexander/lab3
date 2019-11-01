@@ -10,7 +10,6 @@ public class Main {
         JavaSparkContext sc = new JavaSparkContext(conf);
 
         JavaRDD<String> airports = sc.textFile(args[0]);
-
         airports.saveAsTextFile("output1");
 
 
