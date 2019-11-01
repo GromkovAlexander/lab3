@@ -11,12 +11,12 @@ public class Main {
 
         JavaRDD<String> airports = sc.textFile(args[0]);
 
-        airports.saveAsTextFile("output1.txt");
+        airports.saveAsTextFile("output1");
 
 
 
         JavaRDD<String> delays = sc.textFile(args[1]);
-        delays.saveAsTextFile("output2.txt");
+        delays.saveAsTextFile("output2");
 
 
     }
