@@ -21,7 +21,7 @@ public class Main {
         JavaRDD<String> out = airports.filter(line -> !line.equals(title));
 
         JavaRDD<String> check = out.flatMap(x -> Arrays.stream(x.split("\t")).iterator());
-        check.saveAsTextFile("output4");
+        check.saveAsTextFile("output5");
 
 
 
