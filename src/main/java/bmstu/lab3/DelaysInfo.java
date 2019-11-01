@@ -18,6 +18,9 @@ public class DelaysInfo {
     private static final int COLUMN_CANCELLED = 19;
     private static final int COLUMN_FLIGHT_TOOK_PLACE = 14;
 
+    private static final int COLUMN_CANCELLED_ERROR_CODE = 20;
+
+
     private static final int DELAY_POS_INFO = 0;
     private static final int CANCELLED_POS_INFO = 1;
     private static final int NUBMER_OF_FLIGHTS_POS_INFO = 2;
@@ -48,10 +51,10 @@ public class DelaysInfo {
 
                     //[0] время опоздания
                     //[1] отменен рейс или нет
-                    //[1] количество рейсов
+                    //[2] количество рейсов
                     float[] flightsInfo = new float[3];
 
-                    if (Float.parseFloat(getValue(s, COLUMN_CANCELLED)) == IS_CANCELLED) {
+                    if (getValue(s, COLUMN_CANCELLED_ERROR_CODE).length() > 0) {
                         flightsInfo[CANCELLED_POS_INFO] = CANCELLED;
                         flightsInfo[DELAY_POS_INFO] = NULL_TIME;
                     } else {
