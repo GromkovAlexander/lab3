@@ -26,25 +26,14 @@ public class Main {
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
 
-//        JavaRDD<String> airports = loadData(sc, args[0]);
-//
-//        JavaPairRDD<Integer, String> aiportsKV = AirportsInfo.sortKV(airports);
-//
-//        aiportsKV.saveAsTextFile("output11");
+        JavaRDD<String> airports = loadData(sc, args[0]);
+        JavaRDD<String> delays = loadData(sc, args[1]);
 
 
+        Map<Integer, String> aiportsKV = AirportsInfo.sortKV(airports);
+        JavaPairRDD<Pair<Integer, Integer>, String> airportsIDsKV = DelaysInfo.sort(delays);
 
-        //Потом заменить на args[1]
-        JavaRDD<String> delays = loadData(sc, args[0]);
-
-        JavaPairRDD<Pair<Integer, Integer>, float[]> airportsIDsKV = DelaysInfo.flightsFromTo(delays);
-
-        airportsIDsKV.saveAsTextFile("output22");
-
-
-
-
-
+        sc.broadcast(aiportsKV);
 
 
     }

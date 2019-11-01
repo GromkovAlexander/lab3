@@ -5,6 +5,8 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 
+import java.util.Map;
+
 public class AirportsInfo {
 
     private final static String COMMA = ",";
@@ -24,7 +26,7 @@ public class AirportsInfo {
         return deleteQuotes(columns[pos]);
     }
 
-    public static JavaPairRDD<Integer, String> sortKV(JavaRDD<String> file) {
+    public static  Map<Integer, String> sortKV(JavaRDD<String> file) {
         JavaPairRDD<Integer, String> kv = file.mapToPair(
                 s -> new Tuple2<>(
                         Integer.parseInt(getValue(s, COLUMN_AIRPORT_CODE)),
@@ -32,7 +34,9 @@ public class AirportsInfo {
                 )
         );
 
-        return kv;
+        Map<Integer, String> airportsMap = kv.collectAsMap();
+
+        return airportsMap;
     }
 
 }
