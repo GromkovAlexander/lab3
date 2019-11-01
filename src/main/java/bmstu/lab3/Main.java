@@ -16,8 +16,11 @@ public class Main {
 
         JavaRDD<String> airports = sc.textFile(args[0]);
 
-        airports.flatMap(x -> Arrays.stream(x.split(COMMA)).iterator());
-        airports.saveAsTextFile("output3");
+        String title = airports.first();
+
+        JavaRDD<String> check = airports.flatMap(x -> Arrays.stream(x.split(COMMA)).iterator());
+        JavaRDD<String> out = check.filter(line -> !line.equals(title));
+        out.saveAsTextFile("output4");
 
 
 
