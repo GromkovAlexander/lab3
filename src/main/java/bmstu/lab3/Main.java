@@ -39,7 +39,7 @@ public class Main {
 
         JavaPairRDD<Pair<Integer, Integer>, float[]> airportsIDsKV = DelaysInfo.flightsFromTo(delays);
 
-        airportsIDsKV.saveAsTextFile("output20");
+        airportsIDsKV.saveAsTextFile("output21");
 
 
 
