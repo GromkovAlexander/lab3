@@ -25,7 +25,7 @@ public class Main {
 
         aiportsKV.saveAsTextFile("output11");
 
-//        Broadcast<Map<Integer, String>> out = sc.broadcast(aiportsKV.collectAsMap());
+
 
 
 

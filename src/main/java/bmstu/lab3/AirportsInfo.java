@@ -12,6 +12,7 @@ public class AirportsInfo {
     private final static String EMPTY = "";
     private static final int COLUMN_AIRPORT_CODE = 0;
     private static final int COLUMN_AIRPORT_DESCRIPTION = 1;
+    private static final int COUNT_AIRPORT_COLUMNS = 2;
 
     public static JavaRDD<String> loadData(JavaSparkContext sc, String path) {
         JavaRDD<String> airports = sc.textFile(path);
@@ -24,7 +25,7 @@ public class AirportsInfo {
     }
 
     public static String getValue(String s, int pos) {
-        String[] columns = s.split(COMMA, 2);
+        String[] columns = s.split(COMMA, COUNT_AIRPORT_COLUMNS);
         return deleteQuotes(columns[pos]);
     }
 
