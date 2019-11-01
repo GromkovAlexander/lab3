@@ -18,7 +18,7 @@ public class Main {
 
         JavaPairRDD<Integer, String> aiportsKV = AirportsInfo.sortKV(airports);
 
-        aiportsKV.saveAsTextFile("ouput7");
+        aiportsKV.saveAsTextFile("output7");
 
 
 
