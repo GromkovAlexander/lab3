@@ -32,13 +32,13 @@ public class DelaysInfo {
     private static final float ONE_FLIGHT = 1;
 
 
-    public static String deleteQuotes(String s) {
-        return s.replaceAll(QUOTES, EMPTY);
-    }
+//    public static String deleteQuotes(String s) {
+//        return s.replaceAll(QUOTES, EMPTY);
+//    }
 
     public static String getValue(String s, int pos) {
         String[] columns = s.split(COMMA, COUNT_AIRPORT_COLUMNS);
-        return deleteQuotes(columns[pos]);
+        return columns[pos];
     }
 
     public static JavaPairRDD<Pair<Integer, Integer>, float[]> flightsFromTo(JavaRDD<String> file) {
