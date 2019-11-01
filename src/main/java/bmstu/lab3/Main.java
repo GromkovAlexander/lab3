@@ -23,7 +23,7 @@ public class Main {
 
         JavaPairRDD<Integer, String> aiportsKV = AirportsInfo.sortKV(airports);
 
-        aiportsKV.saveAsTextFile("output10");
+        aiportsKV.saveAsTextFile("output11");
 
 //        Broadcast<Map<Integer, String>> out = sc.broadcast(aiportsKV.collectAsMap());
 
