@@ -20,6 +20,10 @@ public class Main {
         return text.filter(s -> !s.equals(title));
     }
 
+    public static JavaRDD<String> allDataToString(JavaPairRDD<Pair<Integer, Integer>, String> delaysInfo) {
+        
+    }
+
 
     public static void main(String[] args) {
 
@@ -30,10 +34,12 @@ public class Main {
         JavaRDD<String> delays = loadData(sc, args[1]);
 
 
-        Map<Integer, String> aiportsKV = AirportsInfo.sortKV(airports);
-        JavaPairRDD<Pair<Integer, Integer>, String> airportsIDsKV = DelaysInfo.sort(delays);
+        Map<Integer, String> airportsInfo = AirportsInfo.sortKV(airports);
+        JavaPairRDD<Pair<Integer, Integer>, String> delaysInfo = DelaysInfo.sort(delays);
 
-        sc.broadcast(aiportsKV);
+        Broadcast<Map<Integer, String>> broadcast = sc.broadcast(airportsInfo);
+
+
 
 
     }

@@ -85,7 +85,7 @@ public class DelaysInfo {
 
     public static JavaPairRDD<Pair<Integer, Integer>, String> toString(JavaPairRDD<Pair<Integer, Integer>, float[]> info) {
         return info.mapValues(
-                data -> "Maximum delay time: " + data[MAX_DELAY_POS_INFO]
+                data ->   "     Maximum delay time: " + data[MAX_DELAY_POS_INFO]
                         + "    Percent delays: " + (data[COUNT_OF_DELAY_FLIGHTS_POS_INFO] / data[COUNT_OF_FLIGHTS_POS_INFO] * 100) + "%"
                         + "    Percent cancelled: " + (data[COUNT_OF_CANCELLED_POS_INFO] / data[COUNT_OF_FLIGHTS_POS_INFO] * 100) + "%"
         );
