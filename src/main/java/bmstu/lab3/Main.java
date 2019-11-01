@@ -31,6 +31,8 @@ public class Main {
 //
 //        aiportsKV.saveAsTextFile("output11");
 
+
+
         //Потом заменить на args[1]
         JavaRDD<String> delays = loadData(sc, args[0]);
 

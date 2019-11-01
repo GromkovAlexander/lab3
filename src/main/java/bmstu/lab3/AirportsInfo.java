@@ -10,9 +10,10 @@ public class AirportsInfo {
     private final static String COMMA = ",";
     private final static String QUOTES = "\"";
     private final static String EMPTY = "";
+
+    private static final int COUNT_AIRPORT_COLUMNS = 2;
     private static final int COLUMN_AIRPORT_CODE = 0;
     private static final int COLUMN_AIRPORT_DESCRIPTION = 1;
-    private static final int COUNT_AIRPORT_COLUMNS = 2;
 
     public static String deleteQuotes(String s) {
         return s.replaceAll(QUOTES, EMPTY);
