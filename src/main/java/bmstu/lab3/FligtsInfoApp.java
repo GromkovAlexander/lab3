@@ -41,6 +41,10 @@ public class Main {
 
     public static void main(String[] args) {
 
+        if (args.length != 3) {
+            System.err.println("Usage: ");
+        }
+
         SparkConf conf = new SparkConf().setAppName("lab3");
         JavaSparkContext sc = new JavaSparkContext(conf);
 
@@ -55,7 +59,7 @@ public class Main {
 
         JavaRDD<String> outInfo = allDataToString(delaysInfo, broadcast);
 
-        outInfo.saveAsTextFile("output31");
+        outInfo.saveAsTextFile(args[2]);
 
 
     }
