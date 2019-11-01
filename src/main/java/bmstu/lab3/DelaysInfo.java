@@ -1,5 +1,6 @@
 package bmstu.lab3;
 
+import javafx.util.Pair;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import scala.Tuple2;
@@ -13,10 +14,13 @@ public class DelaysInfo {
     private static final int COUNT_AIRPORT_COLUMNS = 23;
     private static final int COLUMN_FLIGHT_AIRPORT_ID_FROM = 11;
     private static final int COLUMN_FLIGHT_AIRPORT_ID_TO = 14;
-    private static final int COLUMN_DELAY_POS = 14;
+    private static final int COLUMN_DELAY_POS = 19;
     private static final int COLUMN_FLIGHT_TOOK_PLACE = 14;
 
-    private static final int COLUMN_NUMBER_OF_FLIGHTS = 14;
+    private static final int DELAY_POS_INFO = 0;
+    private static final int TOOK_PLACE_POS_INFO = 1;
+    private static final int NUBMER_OF_FLIGHTS_POS_INFO = 2;
+
 
 
 
@@ -30,18 +34,30 @@ public class DelaysInfo {
     }
 
     public static JavaPairRDD<Integer, Integer> flightsFromTo(JavaRDD<String> file) {
-        JavaPairRDD<Integer, Integer> kv = file.mapToPair(
-                s -> new Tuple2<>(
-                        Integer.parseInt(getValue(s, COLUMN_FLIGHT_AIRPORT_ID_FROM)),
-                        Integer.parseInt(getValue(s, COLUMN_FLIGHT_AIRPORT_ID_TO))
-                )
-        );
+        JavaPairRDD<Pair<Integer, Integer>, float[]> kv = file.mapToPair(
+                s -> {
+                    Pair<Integer, Integer> airportIDs = new Pair<>(
+                            Integer.parseInt(getValue(s, COLUMN_FLIGHT_AIRPORT_ID_FROM)),
+                            Integer.parseInt(getValue(s, COLUMN_FLIGHT_AIRPORT_ID_TO))
+                    );
 
-        float[] flightsInfo = new float[3];
+                    float[] flightsInfo = new float[3];
+
+                    if (Integer.parseInt(getValue(s, COLUMN_DELAY_POS)) == 1) {
+
+                    }
+
+
+                    return new Tuple2<>()
+                });
+
+
 
         //время опоздания
         //отменен рейс или нет
         //количество рейсов
+
+        if (Integer.parseInt(getValue()))
 
 
 
