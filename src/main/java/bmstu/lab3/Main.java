@@ -36,6 +36,10 @@ public class Main {
         //Потом заменить на args[1]
         JavaRDD<String> delays = loadData(sc, args[0]);
 
+        JavaPairRDD<Integer, Integer> airportsIDsKV = DelaysInfo.flightsFromTo(delays);
+
+        airportsIDsKV.saveAsTextFile("output12");
+
 
 
 

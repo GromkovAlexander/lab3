@@ -12,8 +12,8 @@ public class DelaysInfo {
     private final static String EMPTY = "";
 
     private static final int COUNT_AIRPORT_COLUMNS = 23;
-    private static final int AIRPORT_ID_FROM = 23;
-    private static final int AIRPORT_ID_TO = 23;
+    private static final int AIRPORT_ID_FROM = 11;
+    private static final int AIRPORT_ID_TO = 14;
 
 
     public static String deleteQuotes(String s) {
@@ -25,12 +25,11 @@ public class DelaysInfo {
         return deleteQuotes(columns[pos]);
     }
 
-
     public static JavaPairRDD<Integer, Integer> flightsFromTo(JavaRDD<String> file) {
         JavaPairRDD<Integer, Integer> kv = file.mapToPair(
                 s -> new Tuple2<>(
-                        Integer.parseInt(getValue(s, COLUMN_AIRPORT_CODE)),
-                        Integer.parseInt(getValue(s, COLUMN_AIRPORT_DESCRIPTION))
+                        Integer.parseInt(getValue(s, AIRPORT_ID_FROM)),
+                        Integer.parseInt(getValue(s, AIRPORT_ID_TO))
                 )
         );
 
