@@ -4,6 +4,11 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.broadcast.Broadcast;
+import scala.Tuple2;
+
+import java.util.List;
+import java.util.Map;
 
 
 public class Main {
@@ -18,7 +23,10 @@ public class Main {
 
         JavaPairRDD<Integer, String> aiportsKV = AirportsInfo.sortKV(airports);
 
-        aiportsKV.saveAsTextFile("output7");
+        aiportsKV.saveAsTextFile("output10");
+
+//        Broadcast<Map<Integer, String>> out = sc.broadcast(aiportsKV.collectAsMap());
+
 
 
 

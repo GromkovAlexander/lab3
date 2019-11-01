@@ -14,7 +14,7 @@ public class AirportsInfo {
     public static JavaRDD<String> loadData(JavaSparkContext sc, String path) {
         JavaRDD<String> airports = sc.textFile(path);
         String title = airports.first();
-        return airports.filter(line -> !line.equals(title));
+        return airports.filter(s -> !s.equals(title));
     }
 
     public static String getValue(String s, int pos) {
