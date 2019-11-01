@@ -11,8 +11,13 @@ public class DelaysInfo {
     private final static String EMPTY = "";
 
     private static final int COUNT_AIRPORT_COLUMNS = 23;
-    private static final int COLUMN_AIRPORT_ID_FROM = 11;
-    private static final int COLUMN_AIRPORT_ID_TO = 14;
+    private static final int COLUMN_FLIGHT_AIRPORT_ID_FROM = 11;
+    private static final int COLUMN_FLIGHT_AIRPORT_ID_TO = 14;
+    private static final int COLUMN_DELAY_POS = 14;
+    private static final int COLUMN_FLIGHT_TOOK_PLACE = 14;
+
+    private static final int COLUMN_NUMBER_OF_FLIGHTS = 14;
+
 
 
     public static String deleteQuotes(String s) {
@@ -27,12 +32,21 @@ public class DelaysInfo {
     public static JavaPairRDD<Integer, Integer> flightsFromTo(JavaRDD<String> file) {
         JavaPairRDD<Integer, Integer> kv = file.mapToPair(
                 s -> new Tuple2<>(
-                        Integer.parseInt(getValue(s, COLUMN_AIRPORT_ID_FROM)),
-                        Integer.parseInt(getValue(s, COLUMN_AIRPORT_ID_TO))
+                        Integer.parseInt(getValue(s, COLUMN_FLIGHT_AIRPORT_ID_FROM)),
+                        Integer.parseInt(getValue(s, COLUMN_FLIGHT_AIRPORT_ID_TO))
                 )
         );
 
-        System.out.println("testGit");
+        float[] flightsInfo = new float[3];
+
+        //время опоздания
+        //отменен рейс или нет
+        //количество рейсов
+
+
+
+
+
 
         return kv;
     }
