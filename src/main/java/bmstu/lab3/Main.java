@@ -18,9 +18,10 @@ public class Main {
 
         String title = airports.first();
 
-        JavaRDD<String> check = airports.flatMap(x -> Arrays.stream(x.split(COMMA)).iterator());
-        JavaRDD<String> out = check.filter(line -> !line.equals(title));
-        out.saveAsTextFile("output4");
+        JavaRDD<String> out = airports.filter(line -> !line.equals(title));
+
+        JavaRDD<String> check = out.flatMap(x -> Arrays.stream(x.split("\t")).iterator());
+        check.saveAsTextFile("output4");
 
 
 
