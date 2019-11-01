@@ -14,7 +14,8 @@ public class DelaysInfo {
     private static final int COUNT_AIRPORT_COLUMNS = 23;
     private static final int COLUMN_FLIGHT_AIRPORT_ID_FROM = 11;
     private static final int COLUMN_FLIGHT_AIRPORT_ID_TO = 14;
-    private static final int COLUMN_DELAY_POS = 19;
+    private static final int COLUMN_DELAY = 17;
+    private static final int COLUMN_CANCELED = 19;
     private static final int COLUMN_FLIGHT_TOOK_PLACE = 14;
 
     private static final int DELAY_POS_INFO = 0;
