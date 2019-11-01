@@ -20,8 +20,22 @@ public class Main {
         return text.filter(s -> !s.equals(title));
     }
 
-    public static JavaRDD<String> allDataToString(JavaPairRDD<Pair<Integer, Integer>, String> delaysInfo) {
-        
+    public static JavaRDD<String> allDataToString(JavaPairRDD<Pair<Integer, Integer>, String> delaysInfo,
+                                                  Broadcast<Map<Integer, String>> airportsInfo) {
+        return delaysInfo.map(
+                info -> {
+                    int firstAirportID = info._1.getKey();
+                    int secondAirportID = info._1.getValue();
+                    String data = info._2;
+
+                    String firstAirportName = airportsInfo.getValue().get(firstAirportID);
+                    String secondAirportName = airportsInfo.getValue().get(secondAirportID);
+
+                    return "From (" + firstAirportID + "   " + firstAirportName + ")"
+                            + " to (" + secondAirportID + "   " + secondAirportName + ") "
+                            + data;
+                }
+        );
     }
 
 
@@ -39,7 +53,9 @@ public class Main {
 
         Broadcast<Map<Integer, String>> broadcast = sc.broadcast(airportsInfo);
 
+        JavaRDD<String> outInfo = allDataToString(delaysInfo, broadcast);
 
+        outInfo.saveAsTextFile("output30");
 
 
     }
